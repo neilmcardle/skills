@@ -57,3 +57,7 @@ Use the values in `tokens/tokens.css`. Never type a raw colour, radius, shadow o
 - `references/motion.md`
 - `references/touch.md`
 - `references/effects.md`
+
+## Version
+
+2026.11.17. The current version is at <https://github.com/neilmcardle/skills>. To update an installed copy, run `npx skills@latest add neilmcardle/skills` again.

@@ -90,3 +90,7 @@ Open the one you need:
 - `references/performance.md`
 - `references/access.md`
 - `references/system.md`
+
+## Version
+
+2026.11.17. The current version is at <https://github.com/neilmcardle/skills>. To update an installed copy, run `npx skills@latest add neilmcardle/skills` again.

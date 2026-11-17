@@ -1,5 +1,5 @@
 {
-  "root": "..",
+  "root": "/absolute/path/to/the/folder/holding/your/projects",
   "skillCopies": [
     { "system": "performance-ui", "file": "your-project/skills/performance-ui.md" }
   ],

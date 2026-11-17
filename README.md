@@ -16,6 +16,8 @@ Made by [Neil McArdle](https://neilmcardle.com), a product designer.
 npx skills@latest add neilmcardle/skills
 ```
 
+Run the same command again to update. It re-clones the current version, so an installed copy does not otherwise change when these systems do. Each `SKILL.md` carries the version it was published at.
+
 Or copy either folder into `.claude/skills/` in a project, or into `~/.claude/skills/` to use it everywhere. For tools that do not load skills, each folder has an `AGENTS.md` that points at its `SKILL.md`.
 
 ## Applying them to UI that already exists
@@ -62,7 +64,9 @@ node scripts/check-drift.mjs
 
 On its own it checks this repository: the hard rules are numbered without gaps, every reference file the skill names exists, the usage table matches `tokens.css`, no retired value has come back, and every easing curve is a token.
 
-To check your own projects as well, copy `drift.config.example.json` to `drift.config.json` and name the copies and directories to watch. It then compares each copy of a skill and its tokens against the source, flags any CSS variable that has drifted from the token it aliases, and lists curves that are not tokens. A path in the config that does not exist is reported as a failure rather than skipped, so the check cannot pass by finding nothing. It reports how many files it looked at, so a pass is never silent.
+Installed with `npx skills add`, both systems sit side by side in `~/.agents/skills/`, which is the layout the script expects, so it runs there without any setup.
+
+To check your own projects as well, copy `drift.config.example.json` to `drift.config.json` and name the copies and directories to watch. Paths in it resolve against `root`, which is itself relative to the system's own folder, so the example uses an absolute path to keep that unambiguous. It then compares each copy of a skill and its tokens against the source, flags any CSS variable that has drifted from the token it aliases, and lists curves that are not tokens. A path in the config that does not exist is reported as a failure rather than skipped, so the check cannot pass by finding nothing. It reports how many files it looked at, so a pass is never silent.
 
 It exits non-zero when something is out of step, so it can run before a commit or in CI.
 
