@@ -1,0 +1,14 @@
+{
+  "root": "..",
+  "skillCopies": [
+    { "system": "performance-ui", "file": "your-project/skills/performance-ui.md" }
+  ],
+  "varAliases": [
+    { "dirs": ["your-project/app"], "name": "--ease", "system": "performance-ui", "token": "--ease-out" }
+  ],
+  "curveScan": ["your-project/app", "your-project/components"],
+  "retiredScan": ["your-project/app"],
+  "allowRetired": [
+    { "file": "your-project/app/quotes-a-source.css", "why": "quotes another system's curve on purpose" }
+  ]
+}

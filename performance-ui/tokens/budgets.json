@@ -1,0 +1,13 @@
+{
+  "javascriptKB": 150,
+  "javascriptMeasuredAs": "compressed, as Next.js reports first load",
+  "pageKB": 800,
+  "fontFiles": 1,
+  "requests": 25,
+  "imageKB": 200,
+  "videoLoopMB": 2,
+  "largestPaintSeconds": 1.8,
+  "interactionDelayMs": 120,
+  "layoutShift": 0.02,
+  "measuredOn": "a mid-range phone, at the 75th percentile of visits"
+}

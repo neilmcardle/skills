@@ -1,0 +1,35 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #0d0d0c;
+  --color-raised: #161615;
+  --color-raised-hover: #1d1d1b;
+  --color-ink: #ecebe7;
+  --color-text: #8f8c86;
+  --color-underline: #48463f;
+  --color-line: rgb(255 255 255 / 0.06);
+  --color-image-ring: rgb(255 255 255 / 0.06);
+  --edge: 0 0 0 1px rgb(255 255 255 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.4), 0 2px 4px 0 rgb(0 0 0 / 0.3);
+  --edge-hover: 0 0 0 1px rgb(255 255 255 / 0.11), 0 1px 2px -1px rgb(0 0 0 / 0.5), 0 2px 4px 0 rgb(0 0 0 / 0.4);
+  --edge-lifted: 0 0 0 1px rgb(255 255 255 / 0.08), 0 14px 36px 0 rgb(0 0 0 / 0.5);
+  --radius-frame: 20px;
+  --radius-media: 10px;
+  --radius-field: 10px;
+  --radius-chip: 7px;
+  --radius-pill: 999px;
+  --weight-subject: 500;
+  --duration-travel: 400ms;
+  --duration-press: 160ms;
+  --press-scale: 0.96;
+  --header-surface: rgb(13 13 12 / 0.82);
+  --header-blur: 16px;
+  --text-reading-size: 16px;
+  --text-reading-weight: 400;
+  --text-reading-leading: 1.6;
+  --text-interface-size: 13px;
+  --text-interface-weight: 400;
+  --layout-column: 600px;
+  --spring-response: 0.48s;
+  --spring-damping: 0.8;
+  --sound-volume: 0.2;
+  --sound-gap: 120ms;
+}

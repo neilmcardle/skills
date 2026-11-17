@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fafafa">
+<title>performance-ui specimen</title>
+<meta name="description" content="Every token and rule in performance-ui, on one page.">
+<link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens/tokens.css">
+<style>
+@font-face { font-family: "Inter"; src: url("fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter Fallback"; src: local("Arial"); size-adjust: 107%; ascent-override: 90%; }
+:root { color-scheme: light; interpolate-size: allow-keywords; }
+* { box-sizing: border-box; }
+html { -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-reading);
+  letter-spacing: var(--text-body-tracking);
+  line-height: var(--text-body-leading);
+  caret-color: var(--color-ink);
+  accent-color: var(--color-ink);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+::selection { background: var(--color-ink); color: #fff; }
+.skip { position: absolute; left: var(--space-4); top: -100px; }
+.skip:focus-visible { top: var(--space-4); }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.bar {
+  max-width: var(--layout-column);
+  margin: 0 auto;
+  padding: 0 var(--layout-gutter);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-interface-size);
+  font-weight: var(--font-weight-interface);
+  letter-spacing: var(--text-interface-tracking);
+}
+.bar nav { display: flex; gap: var(--space-6); }
+.bar a { color: var(--color-text-muted); text-decoration: none; }
+.bar a[aria-current="page"] { color: var(--color-action); }
+main { max-width: var(--layout-column); margin: 0 auto; padding: 0 var(--layout-gutter) var(--space-16); }
+h1 {
+  margin: var(--space-16) 0 var(--space-4);
+  color: var(--color-ink);
+  font-size: var(--text-display-phone-size);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--text-display-phone-tracking);
+  line-height: var(--text-display-phone-leading);
+  text-wrap: balance;
+}
+@media (min-width: 700px) { h1 { font-size: var(--text-display-size); } }
+h2 {
+  margin: var(--layout-heading-above) 0 var(--layout-heading-below);
+  color: var(--color-ink);
+  font-size: var(--text-title-size);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--text-title-tracking);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+h3 {
+  margin: 0 0 var(--space-2);
+  color: var(--color-ink);
+  font-size: var(--text-subhead-size);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--text-subhead-tracking);
+  line-height: 1.3;
+}
+p { margin: 0; max-width: var(--text-measure); text-wrap: pretty; }
+p + p { margin-top: 0.75em; }
+section + section { margin-top: var(--layout-section-gap); }
+section { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+.small { font-size: var(--text-interface-size); font-weight: var(--font-weight-interface); letter-spacing: var(--text-interface-tracking); color: var(--color-text-muted); }
+.lead { margin-bottom: var(--space-8); }
+a { color: var(--color-action); text-decoration: underline; text-underline-offset: var(--size-underline-offset); text-decoration-thickness: var(--size-underline-thickness); text-decoration-color: rgb(29 29 31 / 0.45); }
+@media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
+:focus-visible { outline: var(--size-focus-width) solid var(--color-ink); outline-offset: var(--size-focus-offset); }
+.row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-3); margin-top: var(--space-6); }
+.swatch { background: var(--color-surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden; }
+.swatch > span { display: block; height: 56px; box-shadow: inset 0 -1px 0 var(--color-line); }
+.swatch div { padding: var(--space-3); }
+.sizes { margin-top: var(--space-6); }
+.size { display: flex; align-items: baseline; gap: var(--space-4); padding: var(--space-3) 0; border-top: 1px solid; border-image: linear-gradient(90deg, var(--color-line), transparent) 1; }
+.size .small { width: 48px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.size b { color: var(--color-ink); font-weight: var(--font-weight-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn {
+  height: var(--size-button-height);
+  min-width: var(--size-target);
+  padding: 0 var(--size-button-pad);
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: var(--text-interface-size);
+  font-weight: var(--font-weight-button);
+  letter-spacing: var(--text-interface-tracking);
+  cursor: pointer;
+  transition: transform var(--duration-press) var(--ease-out);
+  touch-action: manipulation;
+}
+.btn:active { transform: scale(0.97); }
+.btn.filled { background: var(--color-action); color: #fff; }
+.btn.outline { background: var(--color-surface); color: var(--color-action); border-color: var(--color-field-border); }
+.btn.text { background: transparent; color: var(--color-action); padding: 0 var(--space-2); }
+.card { background: var(--color-surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-6); margin-top: var(--space-6); }
+form { display: grid; gap: var(--space-4); max-width: 360px; }
+label { display: block; margin-bottom: var(--space-2); color: var(--color-ink); font-size: var(--text-interface-size); font-weight: var(--font-weight-interface); }
+input {
+  width: 100%;
+  height: var(--size-input-height);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-field-border);
+  border-radius: var(--radius-input);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 16px;
+}
+input[aria-invalid="true"] { border-color: var(--color-action); }
+.error { display: flex; gap: var(--space-2); align-items: center; margin-top: var(--space-2); color: var(--color-action); font-size: var(--text-interface-size); }
+.error svg, .icon { width: var(--size-icon); height: var(--size-icon); flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.list { margin-top: var(--space-6); }
+.list > div { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: var(--layout-row-pad) 0; border-top: 1px solid var(--color-line); }
+.list > div:last-child { border-bottom: 1px solid var(--color-line); }
+.list b { color: var(--color-ink); font-weight: var(--font-weight-interface); }
+.num { font-variant-numeric: tabular-nums; }
+table { width: 100%; margin-top: var(--space-6); border-collapse: collapse; font-size: var(--text-interface-size); font-variant-numeric: tabular-nums; white-space: nowrap; }
+th { text-align: left; color: var(--color-text-muted); font-weight: var(--font-weight-interface); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-line); }
+td { padding: 0 var(--space-3); height: 44px; border-bottom: 1px solid var(--color-line); }
+td:first-child { color: var(--color-ink); }
+th.r, td.r { text-align: right; }
+.wrap { overflow-x: auto; }
+.skeleton { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #eee 25%, #f6f6f6 50%, #eee 75%); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.list > .skel-row { display: grid; justify-content: stretch; gap: var(--space-2); }
+details { margin-top: var(--space-6); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+summary { list-style: none; display: flex; justify-content: space-between; align-items: center; min-height: var(--size-target); cursor: pointer; color: var(--color-ink); font-weight: var(--font-weight-interface); }
+summary::-webkit-details-marker { display: none; }
+summary .icon { transition: transform var(--duration-fold) var(--ease-out); }
+details[open] summary .icon { transform: rotate(180deg); }
+details::details-content { block-size: 0; overflow: hidden; transition: block-size var(--duration-fold) var(--ease-out), content-visibility var(--duration-fold) allow-discrete; }
+details[open]::details-content { block-size: auto; }
+details p { padding-bottom: var(--space-4); }
+.shot { margin-top: var(--space-6); aspect-ratio: 16 / 9; border-radius: var(--radius-card); background: #e9e9e9; box-shadow: var(--shadow-image-ring); }
+.nest { margin-top: var(--space-6); display: inline-block; padding: var(--radius-nested-gap); border-radius: var(--radius-nested-outer); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.nest div { padding: var(--space-4) var(--space-6); border-radius: var(--radius-nested-inner); background: var(--color-bg); color: var(--color-ink); }
+footer { max-width: var(--layout-column); margin: 0 auto; padding: var(--space-6) var(--layout-gutter) calc(var(--space-6) + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-line); }
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+  .btn, summary .icon, details::details-content { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip btn filled" href="#main">Skip to content</a>
+<header>
+  <div class="bar">
+    <span style="color:var(--color-ink)">performance-ui</span>
+    <nav aria-label="Main">
+      <a href="#colour" aria-current="page">Specimen</a>
+      <a href="README.md">Read me</a>
+      <a href="SKILL.md">Rules</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <h1>Fast, calm and precise.</h1>
+  <p class="lead">Every token and rule in performance-ui, on one page. Everything here costs little or nothing in load time or smoothness.</p>
+
+  <section id="colour">
+    <h2>Colour</h2>
+    <p>An off-white page, white surfaces, grey reading text and two near-blacks. There is no accent: the ink does that job.</p>
+    <div class="swatches">
+      <div class="swatch"><span style="background:var(--color-bg)"></span><div class="small">Page<br>#fafafa</div></div>
+      <div class="swatch"><span style="background:var(--color-surface)"></span><div class="small">Surface<br>#ffffff</div></div>
+      <div class="swatch"><span style="background:var(--color-text)"></span><div class="small">Reading text<br>#5c5c5c</div></div>
+      <div class="swatch"><span style="background:var(--color-text-muted)"></span><div class="small">Muted<br>#737373</div></div>
+      <div class="swatch"><span style="background:var(--color-ink)"></span><div class="small">Ink<br>#0d1117</div></div>
+      <div class="swatch"><span style="background:var(--color-action)"></span><div class="small">Action<br>#1d1d1f</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Type</h2>
+    <p>Inter alone, in six sizes and no others.</p>
+    <div class="sizes">
+      <div class="size"><span class="small">56</span><b style="font-size:var(--text-display-size);letter-spacing:var(--text-display-tracking);line-height:var(--text-display-leading)">Fewer steps</b></div>
+      <div class="size"><span class="small">44</span><b style="font-size:var(--text-display-phone-size);letter-spacing:var(--text-display-phone-tracking);line-height:var(--text-display-phone-leading)">Fewer steps</b></div>
+      <div class="size"><span class="small">24</span><b style="font-size:var(--text-title-size);letter-spacing:var(--text-title-tracking)">Choose your car</b></div>
+      <div class="size"><span class="small">20</span><b style="font-size:var(--text-subhead-size);letter-spacing:var(--text-subhead-tracking)">Protection and extras</b></div>
+      <div class="size"><span class="small">16</span><span>Reading text at weight 425, with a line height of 1.5.</span></div>
+      <div class="size"><span class="small">13</span><span class="small" style="width:auto;color:var(--color-text)">Interface text, labels and buttons at weight 450.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Controls</h2>
+    <p>Pill buttons step down from filled to outline to plain text. Press one to feel the 0.97 shrink. Tab to see focus. <a href="#main">Links underline faintly</a> and darken on hover.</p>
+    <div class="row" style="margin-top:var(--space-6)">
+      <button class="btn filled" type="button">Continue to payment</button>
+      <button class="btn outline" type="button">Change dates</button>
+      <button class="btn text" type="button">Cancel</button>
+    </div>
+    <div class="card">
+      <form novalidate onsubmit="return false">
+        <div>
+          <label for="name">Full name</label>
+          <input id="name" autocomplete="name" value="Bartholomew Fitzgerald-Montgomery III">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" value="bartholomew@northwind" aria-invalid="true" aria-describedby="email-error">
+          <div class="error" id="email-error"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Add the part after the dot, such as .com</div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lists and tables</h2>
+    <p>Sets of things sit in hairline lists. Tables compare, so numbers line up on the right in even-width digits.</p>
+    <div class="list">
+      <div><b>Fiat 500</b><span class="num">£42.00</span></div>
+      <div><b>VW Golf</b><span class="num">£58.50</span></div>
+      <div><b>Kia Sportage</b><span class="num">£84.00</span></div>
+    </div>
+    <div class="wrap">
+      <table>
+        <thead><tr><th>Class</th><th>Example</th><th class="r">Seats</th><th class="r">Per day</th></tr></thead>
+        <tbody>
+          <tr><td>Economy</td><td>Fiat 500</td><td class="r">4</td><td class="r">£42.00</td></tr>
+          <tr><td>Compact</td><td>VW Golf</td><td class="r">5</td><td class="r">£58.50</td></tr>
+          <tr><td>Premium</td><td>BMW 3 Series</td><td class="r">5</td><td class="r">£112.75</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Loading</h2>
+    <p>Nothing for the first 300ms. After that, a shimmering skeleton the shape of what is coming.</p>
+    <div class="list" aria-busy="true" aria-label="Loading cars">
+      <div class="skel-row"><div class="skeleton" style="width:60%"></div><div class="skeleton" style="width:35%"></div></div>
+      <div class="skel-row"><div class="skeleton" style="width:72%"></div><div class="skeleton" style="width:28%"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Shape</h2>
+    <p>Cards are 12px with one soft shadow. Images get a faint inner ring. A nested corner equals the inner radius plus the gap.</p>
+    <div class="shot" role="img" aria-label="An image placeholder holding its space"></div>
+    <div class="nest"><div>16 = 10 + 6</div></div>
+    <details>
+      <summary>What does the price include?<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <p>Folds open by animating their height over 240ms, so you can see where the content came from.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="small">MIT licence. <a href="LICENSE">Read it</a>.</footer>
+</body>
+</html>
